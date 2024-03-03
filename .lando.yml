@@ -1,0 +1,29 @@
+name: restclient
+
+services:
+
+  app:
+    scanner: false
+    api: 3
+    type: lando
+    build_as_root:
+      - apt-get update -y && apt-get install -y libxrender1 libxtst6 libxi6 --no-install-recommends && rm -rf /var/lib/apt/lists/*
+    services:      
+      image: eclipse-temurin:8u402-b06-jre-jammy
+      command: 'tail -f /dev/null'
+      # https://medium.com/@sahilgulghane22/running-gui-applications-in-docker-containers-9c36c3196a6b
+      volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
+      environment:
+        DISPLAY: ":0"
+    volumes:
+      app:
+
+tooling:
+  java:
+    service: app
+  restclient:
+    service: app
+    cmd:
+      - java -jar restclient-ui-fat-3.7.1.jar
+

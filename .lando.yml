@@ -11,9 +11,16 @@ services:
     services:      
       image: eclipse-temurin:8u402-b06-jre-jammy
       command: 'tail -f /dev/null'
+      
+      # Uncomment these 2 lines if you need to access the built-in Trace Server on your computer at address 0.0.0.0:10101
+      #ports:
+      #  - '10101:10101'
+      
       # https://medium.com/@sahilgulghane22/running-gui-applications-in-docker-containers-9c36c3196a6b
       volumes:
         - /tmp/.X11-unix:/tmp/.X11-unix
+        # App settings files folder.
+        - ./rest-client:/var/www/.rest-client
       environment:
         DISPLAY: ":0"
     volumes:
@@ -26,4 +33,8 @@ tooling:
     service: app
     cmd:
       - java -jar restclient-ui-fat-3.7.1.jar
+  restclient-cli:
+    service: app
+    cmd:
+      - java -jar restclient-cli-fat-3.7.1.jar
 

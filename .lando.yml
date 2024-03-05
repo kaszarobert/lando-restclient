@@ -6,10 +6,8 @@ services:
     scanner: false
     api: 3
     type: lando
-    build_as_root:
-      - apt-get update -y && apt-get install -y libxrender1 libxtst6 libxi6 --no-install-recommends && rm -rf /var/lib/apt/lists/*
     services:      
-      image: eclipse-temurin:8u402-b06-jre-jammy
+      image: kaszarobert/restclient_docker:latest
       command: 'tail -f /dev/null'
       
       # Uncomment these 2 lines if you need to access the built-in Trace Server on your computer at address 0.0.0.0:10101
@@ -20,7 +18,7 @@ services:
       volumes:
         - /tmp/.X11-unix:/tmp/.X11-unix
         # App settings files folder.
-        - ./rest-client:/var/www/.rest-client
+        #- ./rest-client:/var/www/.rest-client
       environment:
         DISPLAY: ":0"
     volumes:
@@ -29,12 +27,15 @@ services:
 tooling:
   java:
     service: app
+    user: newuser
   restclient:
     service: app
+    user: newuser
     cmd:
-      - java -jar restclient-ui-fat-3.7.1.jar
+      - java -jar /application/restclient-ui.jar
   restclient-cli:
     service: app
+    user: newuser
     cmd:
-      - java -jar restclient-cli-fat-3.7.1.jar
+      - java -jar /application/restclient-cli.jar
 

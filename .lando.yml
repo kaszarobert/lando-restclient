@@ -20,7 +20,7 @@ services:
         # App settings files folder.
         #- ./rest-client:/var/www/.rest-client
       environment:
-        DISPLAY: ":0"
+        DISPLAY: $DISPLAY
     volumes:
       app:
 

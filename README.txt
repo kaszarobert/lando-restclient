@@ -7,6 +7,9 @@ lando start
 - To run app:
 lando restclient
 
+- Bash script to run app:
+./restclient.sh
+
 - To exit:
 
 lando stop

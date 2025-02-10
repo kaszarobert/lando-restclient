@@ -17,8 +17,6 @@ services:
       # https://medium.com/@sahilgulghane22/running-gui-applications-in-docker-containers-9c36c3196a6b
       volumes:
         - /tmp/.X11-unix:/tmp/.X11-unix
-        # App settings files folder.
-        #- ./rest-client:/var/www/.rest-client
       environment:
         DISPLAY: $DISPLAY
     volumes:
